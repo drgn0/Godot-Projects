@@ -1,0 +1,55 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://UI/coin/coin_4.png" type="Texture" id=1]
+[ext_resource path="res://UI/coin/coin_1.png" type="Texture" id=2]
+[ext_resource path="res://UI/coin/coin_3.png" type="Texture" id=3]
+[ext_resource path="res://UI/coin/coin_2.png" type="Texture" id=4]
+[ext_resource path="res://UI/Coin.gd" type="Script" id=5]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 4 ), ExtResource( 3 ), ExtResource( 1 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 38.0
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 4.0
+
+[node name="Coin" type="Node2D"]
+script = ExtResource( 5 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 7.62939e-06, 1.90735e-06 )
+frames = SubResource( 1 )
+frame = 2
+playing = true
+
+[node name="attract" type="Area2D" parent="."]
+input_pickable = false
+collision_layer = 16
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="attract"]
+shape = SubResource( 2 )
+
+[node name="collide" type="Area2D" parent="."]
+input_pickable = false
+collision_layer = 16
+collision_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="collide"]
+shape = SubResource( 3 )
+
+[node name="DespawnTimer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+autostart = true
+[connection signal="body_entered" from="attract" to="." method="_on_attract_body_entered"]
+[connection signal="body_exited" from="attract" to="." method="_on_attract_body_exited"]
+[connection signal="body_entered" from="collide" to="." method="_on_collide_body_entered"]
+[connection signal="timeout" from="DespawnTimer" to="." method="_on_DespawnTimer_timeout"]

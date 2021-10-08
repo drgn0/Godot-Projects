@@ -1,0 +1,64 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Game/Board/Board.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Game/Game.gd" type="Script" id=2]
+[ext_resource path="res://Game/Bot.gd" type="Script" id=3]
+
+[node name="Game" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Board" parent="." instance=ExtResource( 1 )]
+position = Vector2( 128, 88 )
+scale = Vector2( 0.75, 0.75 )
+
+[node name="Money" type="Node2D" parent="."]
+
+[node name="Label" type="Label" parent="Money"]
+margin_left = 648.0
+margin_top = 392.0
+margin_right = 688.0
+margin_bottom = 406.0
+rect_scale = Vector2( 2, 2 )
+text = "100"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="Money"]
+margin_left = 648.0
+margin_top = 72.0
+margin_right = 688.0
+margin_bottom = 86.0
+rect_scale = Vector2( 2, 2 )
+text = "100"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bot" type="Node" parent="."]
+script = ExtResource( 3 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = 128.0
+margin_top = 48.0
+margin_right = 200.0
+margin_bottom = 64.0
+text = "Turns Left:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="turns_left" type="Label" parent="."]
+margin_left = 208.0
+margin_top = 48.0
+margin_right = 248.0
+margin_bottom = 64.0
+text = "50"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="decrease_coins" from="." to="." method="_on_Game_decrease_coins"]
+[connection signal="increase_coins" from="." to="." method="_on_Game_increase_coins"]
+[connection signal="next_turn" from="." to="." method="_on_Game_next_turn"]
+[connection signal="player_lose" from="." to="." method="_on_Game_player_lose"]
+[connection signal="player_played_move" from="." to="." method="_on_Game_player_played_move"]

@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Player/Guns/Weapon.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Player/Guns/Bazzoka.gd" type="Script" id=2]
+
+[node name="Bazzoka" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="Line2D" parent="." index="0"]
+width = 6.0
+default_color = Color( 0.843137, 0.403922, 0, 1 )

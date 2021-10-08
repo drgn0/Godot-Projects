@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://World/Bullet.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Player/Ammo/Bullet_1.gd" type="Script" id=2]
+
+[node name="Bullet_1" instance=ExtResource( 1 )]
+script = ExtResource( 2 )

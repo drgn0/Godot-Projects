@@ -1,0 +1,48 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Player/Player.gd" type="Script" id=1]
+[ext_resource path="res://white_box_64X64.png" type="Texture" id=2]
+[ext_resource path="res://Player/Guns/Weapon_1.tscn" type="PackedScene" id=3]
+[ext_resource path="res://UI/Stats.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Player/Guns/Weapon_2.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Player/Guns/Bazzoka.tscn" type="PackedScene" id=6]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 8, 8 )
+
+[node name="Player" type="KinematicBody2D"]
+collision_layer = 4
+script = ExtResource( 1 )
+
+[node name="white_box_64X64" type="Sprite" parent="."]
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+limit_smoothed = true
+
+[node name="Stats" parent="." instance=ExtResource( 4 )]
+scale = Vector2( 0.33, 0.5 )
+transform = Transform2D( 0.33, 0, 0, 0.5, 0, 0 )
+initial_offset = Vector2( -10, 20 )
+
+[node name="ImmuneTimer" type="Timer" parent="."]
+
+[node name="Gun" parent="." instance=ExtResource( 3 )]
+visible = false
+
+[node name="Weapons" type="Node2D" parent="."]
+
+[node name="Weapon_1" parent="Weapons" instance=ExtResource( 3 )]
+
+[node name="Weapon_2" parent="Weapons" instance=ExtResource( 5 )]
+visible = false
+
+[node name="Bazzoka" parent="Weapons" instance=ExtResource( 6 )]
+visible = false
+[connection signal="get_damage" from="." to="." method="get_damage"]
+[connection signal="get_knockback" from="." to="." method="get_knockback"]
